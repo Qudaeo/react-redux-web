@@ -1,19 +1,30 @@
-.navbar {
+.header {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 7px 15px 7px 15px;
+    padding: 7px 15px;
     background-color: #e5e5e5;
     box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
 }
 
-.navbar_buttons {
+.logo:hover {
+    scale: 1.05;
+}
+
+.header_buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.navbar_button {
-    margin-right: 10px;
+.header_button {
+    padding: 7px 10px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: black;
+}
+
+.header_button:hover {
+    background: rgba(0, 0, 0, 0.1);
 }

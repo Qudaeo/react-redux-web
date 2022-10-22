@@ -1,10 +1,9 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import './App.css';
-import Navbar from './components/Navbar';
+import Header from './components/Header/Header';
 
 const App = () => (
   <BrowserRouter>
-    <Navbar />
+    <Header />
     <Routes>
       <Route path={'/'} element={<div>Hello world!</div>} />
       <Route path={'/signup'} element={<div>sign up</div>} />
