@@ -23,9 +23,7 @@ const Login = ({type}: IProps) => {
           placeholder={'Email'}
           value={user.email}
           onChange={e => {
-            dispatch(
-              setUser({email: e.currentTarget.value, password: user.password})
-            );
+            dispatch(setUser({...user, email: e.currentTarget.value}));
           }}
           required
         />
@@ -36,9 +34,7 @@ const Login = ({type}: IProps) => {
           placeholder={'Password'}
           value={user.password}
           onChange={e => {
-            dispatch(
-              setUser({email: user.email, password: e.currentTarget.value})
-            );
+            dispatch(setUser({...user, password: e.currentTarget.value}));
           }}
           required
         />
