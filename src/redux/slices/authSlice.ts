@@ -1,7 +1,6 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import type {PayloadAction} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {apiAuth} from '../../api/apiAuth';
-import {setToken, Token} from '../../services/localStorage';
 
 export interface IUser {
   email: string;
@@ -18,13 +17,7 @@ export const login = createAsyncThunk(
   async ({email, password}: {email: string; password: string}) => {
     console.log('auth/login');
 
-    const data = await apiAuth.login(email, password);
-
-    if (data) {
-      setToken(Token.access_token, data.tokens.access_token);
-      setToken(Token.refresh_token, data.tokens.refresh_token);
-      return data;
-    }
+    return await apiAuth.login(email, password);
   }
 );
 

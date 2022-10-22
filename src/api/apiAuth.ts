@@ -1,5 +1,11 @@
 import axiosInstance from './axiosInstance';
-import {IAuth} from '../types/auth';
+import {IAuth, ITokens} from '../types/auth';
+import {
+  getToken,
+  removeTokens,
+  setTokens,
+  Token,
+} from '../services/localStorage';
 
 export const apiAuth = {
   login: async (email: string, password: string) => {
@@ -9,7 +15,11 @@ export const apiAuth = {
           email,
           password,
         })
-        .then(response => response.data);
+        .then(response => {
+          setTokens(response.data.tokens);
+
+          return response.data;
+        });
     } catch (e) {
       console.log('auth/login error', e);
     }
@@ -23,9 +33,30 @@ export const apiAuth = {
           name,
           password,
         })
-        .then(response => response.data);
+        .then(response => {
+          setTokens(response.data.tokens);
+
+          return response.data;
+        });
     } catch (e) {
       console.log('auth/registration error', e);
     }
+  },
+
+  refresh: async () => {
+    return await axiosInstance
+      .post<ITokens>('auth/refresh', {
+        refresh_token: getToken(Token.refresh_token),
+      })
+      .then(response => {
+        setTokens(response.data);
+        console.log('auth/refresh', response.data);
+
+        return response.data;
+      })
+      .catch(e => {
+        removeTokens();
+        console.log('auth/refresh error', e);
+      });
   },
 };
