@@ -1,4 +1,4 @@
-interface ITokens {
+export interface ITokens {
   token_type: 'Bearer';
   expires_in: number;
   access_token: string;

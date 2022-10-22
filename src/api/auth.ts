@@ -4,17 +4,15 @@ import {IAuth} from './types';
 export const auth = {
   login: async (email: string, password: string) => {
     try {
-      const response = await instance
+      return await instance
         .post<IAuth>('auth/login', {
           email,
           password,
         })
-        .catch(e => {
-          return e.response;
-        });
-
-      console.log('auth/login response', response);
-      return response;
+        .then(response => response);
+      // .catch(e => {
+      //   //return e.response;
+      // });
     } catch (e) {
       console.log('auth/login error', e);
     }
