@@ -1,17 +1,13 @@
 import axiosInstance from './axiosInstance';
 import {IAuth, ITokens} from '../types/auth';
-import {
-  getToken,
-  removeTokens,
-  setTokens,
-  Token,
-} from '../services/localStorage';
+import {getToken, setTokens, Token} from '../services/localStorage';
+import {Url} from './urls';
 
 export const apiAuth = {
   login: async (email: string, password: string) => {
     try {
       return await axiosInstance
-        .post<IAuth>('auth/login', {
+        .post<IAuth>(Url.AUTH_LOGIN, {
           email,
           password,
         })
@@ -28,7 +24,7 @@ export const apiAuth = {
   registration: async (email: string, name: string, password: string) => {
     try {
       return await axiosInstance
-        .post<IAuth>('auth/registration', {
+        .post<IAuth>(Url.AUTH_REGISTRATION, {
           email,
           name,
           password,
@@ -45,17 +41,13 @@ export const apiAuth = {
 
   refresh: async () => {
     return await axiosInstance
-      .post<ITokens>('auth/refresh', {
+      .post<ITokens>(Url.AUTH_REFRESH, {
         refresh_token: getToken(Token.refresh_token),
       })
       .then(response => {
         setTokens(response.data);
-        console.log('auth/refresh', response.data);
-
-        return response.data;
       })
       .catch(e => {
-        removeTokens();
         console.log('auth/refresh error', e);
       });
   },

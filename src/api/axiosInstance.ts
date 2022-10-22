@@ -1,7 +1,8 @@
 import axios from 'axios';
 import {API_KEY, API_URL} from '../base/const';
-import {getToken, Token} from '../services/localStorage';
+import {getToken, removeTokens, Token} from '../services/localStorage';
 import {apiAuth} from './apiAuth';
+import {Url} from './urls';
 
 const axiosInstance = axios.create({
   baseURL: API_URL,
@@ -27,6 +28,13 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async function (error) {
+    if (
+      error.response.status === 401 &&
+      error.config.url === Url.AUTH_REFRESH
+    ) {
+      removeTokens();
+    }
+
     if (error.response.status === 401 && getToken(Token.refresh_token)) {
       await apiAuth.refresh();
 

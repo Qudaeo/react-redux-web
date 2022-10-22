@@ -10,7 +10,6 @@ const Items = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    console.log('i fire once');
     dispatch(getItems());
   }, []);
 
