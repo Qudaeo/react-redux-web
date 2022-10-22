@@ -1,3 +1,6 @@
+import {useDispatch, useSelector} from 'react-redux';
+import {setUser} from '../redux/slices/authSlice';
+import {RootState} from '../redux/store';
 import styles from './Login.module.css';
 
 interface IProps {
@@ -5,6 +8,9 @@ interface IProps {
 }
 
 const Login = ({type}: IProps) => {
+  const user = useSelector((state: RootState) => state.auth.user);
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.container}>
       <form>
@@ -15,6 +21,12 @@ const Login = ({type}: IProps) => {
           type={'email'}
           name={'email'}
           placeholder={'Email'}
+          value={user.email}
+          onChange={e => {
+            dispatch(
+              setUser({email: e.currentTarget.value, password: user.password})
+            );
+          }}
           required
         />
         <input
@@ -22,6 +34,12 @@ const Login = ({type}: IProps) => {
           type={'password'}
           name={'password'}
           placeholder={'Password'}
+          value={user.password}
+          onChange={e => {
+            dispatch(
+              setUser({email: user.email, password: e.currentTarget.value})
+            );
+          }}
           required
         />
         {type === 'login' && (

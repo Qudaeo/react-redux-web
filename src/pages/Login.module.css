@@ -21,7 +21,7 @@
 input[type="email"],
 input[type="password"]
 {
-    color: #8a8b8e;
+    color: #4a4b4e;
     border: 1px solid #c2c0ca;
     margin-bottom: 25px;
 }
@@ -31,6 +31,7 @@ input:hover {
 }
 
 input:focus {
+    color: black;
     border-color: #a2a0aa;
 }
 
