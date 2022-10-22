@@ -1,18 +1,15 @@
-import {instance} from './instance';
-import {IAuth} from './types';
+import axiosInstance from './axiosInstance';
+import {IAuth} from '../types/auth';
 
-export const auth = {
+export const apiAuth = {
   login: async (email: string, password: string) => {
     try {
-      return await instance
+      return await axiosInstance
         .post<IAuth>('auth/login', {
           email,
           password,
         })
-        .then(response => response);
-      // .catch(e => {
-      //   //return e.response;
-      // });
+        .then(response => response.data);
     } catch (e) {
       console.log('auth/login error', e);
     }
@@ -20,18 +17,13 @@ export const auth = {
 
   registration: async (email: string, name: string, password: string) => {
     try {
-      const response = await instance
+      return await axiosInstance
         .post<IAuth>('auth/registration', {
           email,
           name,
           password,
         })
-        .catch(() => {
-          //return e.response;
-        });
-
-      console.log('auth/registration response', response);
-      return response?.data;
+        .then(response => response.data);
     } catch (e) {
       console.log('auth/registration error', e);
     }

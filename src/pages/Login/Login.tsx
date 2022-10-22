@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {login, registration, setUser} from '../redux/slices/authSlice';
-import {AppDispatch, RootState} from '../redux/store';
+import {login, registration, setUser} from '../../redux/slices/authSlice';
+import {AppDispatch, RootState} from '../../redux/store';
 import styles from './Login.module.css';
 
 interface IProps {

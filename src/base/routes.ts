@@ -1,7 +1,6 @@
 export enum AppRoute {
-  Home = '/',
+  Items = '/',
   SignUp = 'signup',
   Login = 'login',
-  Products = 'products',
-  Other = '/*',
+  NotFound = '/*',
 }
