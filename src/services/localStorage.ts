@@ -37,4 +37,6 @@ export const setTokens = (tokens: ITokens) => {
 export const removeTokens = () => {
   removeToken(Token.access_token);
   removeToken(Token.refresh_token);
+
+  return true;
 };

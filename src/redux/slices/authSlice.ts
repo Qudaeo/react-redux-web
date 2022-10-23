@@ -1,6 +1,8 @@
 import type {PayloadAction} from '@reduxjs/toolkit';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {apiAuth} from '../../api/apiAuth';
+import {removeTokens} from '../../services/localStorage';
+import {clearItems} from './itemsSlice';
 
 export interface IUser {
   email: string;
@@ -9,6 +11,7 @@ export interface IUser {
 }
 
 export interface AuthState {
+  isAuth: boolean;
   user: IUser;
 }
 
@@ -38,7 +41,13 @@ export const registration = createAsyncThunk(
   }
 );
 
+export const appExit = createAsyncThunk('auth/appExit', (_, thunkAPI) => {
+  thunkAPI.dispatch(clearItems());
+  removeTokens();
+});
+
 const initialState: AuthState = {
+  isAuth: false,
   user: {
     name: '',
     email: '',
@@ -53,20 +62,27 @@ export const authSlice = createSlice({
     setUser: (state, action: PayloadAction<IUser>) => {
       state.user = action.payload;
     },
+    setAuth: (state, action: PayloadAction<{isAuth: boolean}>) => {
+      state.isAuth = action.payload.isAuth;
+    },
   },
   extraReducers: builder => {
-    builder.addCase(login.fulfilled, (state, action) => {
-      console.log(state, action);
-      //state.entities.push(action.payload);
+    builder.addCase(login.fulfilled, state => {
+      state.isAuth = true;
     });
 
-    builder.addCase(registration.fulfilled, (state, action) => {
-      console.log(state, action);
-      //state.entities.push(action.payload);
+    builder.addCase(registration.fulfilled, state => {
+      state.isAuth = true;
+    });
+
+    builder.addCase(appExit.fulfilled, state => {
+      state = initialState;
+
+      return state;
     });
   },
 });
 
-export const {setUser} = authSlice.actions;
+export const {setAuth, setUser} = authSlice.actions;
 
 export default authSlice.reducer;

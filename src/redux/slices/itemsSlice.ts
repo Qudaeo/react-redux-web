@@ -23,7 +23,13 @@ const initialState: ItemsState = {
 export const itemsSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    clearItems: state => {
+      state = initialState;
+
+      return state;
+    },
+  },
   extraReducers: builder => {
     builder.addCase(getItems.fulfilled, (state, action) => {
       console.log(state, action);
@@ -32,6 +38,6 @@ export const itemsSlice = createSlice({
   },
 });
 
-//export const {} = itemsSlice.actions;
+export const {clearItems} = itemsSlice.actions;
 
 export default itemsSlice.reducer;
