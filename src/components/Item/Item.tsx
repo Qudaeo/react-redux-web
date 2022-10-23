@@ -1,12 +1,16 @@
 import styles from './Item.module.css';
 import {IItem} from '../../types/items';
 import {toRUB} from '../../services/locale';
+import {useNavigate} from 'react-router-dom';
+import {AppRoute} from '../../base/routes';
 
 interface IProps {
   item: IItem;
 }
 
 const Item = ({item}: IProps) => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.container}>
       <div className={styles.item}>
@@ -15,6 +19,11 @@ const Item = ({item}: IProps) => {
         <div className={styles.description}>{item.description}</div>
       </div>
       <div className={styles.price}>{toRUB(item.price / 100)}</div>
+      <div
+        className={styles.hoverArea}
+        onClick={() => {
+          navigate(AppRoute.Details + `/${item.id}`);
+        }}></div>
     </div>
   );
 };

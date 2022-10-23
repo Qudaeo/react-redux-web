@@ -1,7 +1,7 @@
 import {Provider} from 'react-redux';
 import {BrowserRouter} from 'react-router-dom';
 import Header from './components/Header/Header';
-import AppRoutes from './Routes/Routes';
+import AppRoutes from './navigation/Routes';
 import {store} from './redux/store';
 
 const App = () => (

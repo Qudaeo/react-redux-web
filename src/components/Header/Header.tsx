@@ -1,16 +1,20 @@
 import styles from './Header.module.css';
 import {ReactComponent as Logo} from '../../assets/images/logo.svg';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store';
 import {appExit} from '../../redux/slices/authSlice';
+import {AppRoute} from '../../base/routes';
 
 const Header = () => {
   const {isAuth, user} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
 
+  const navigate = useNavigate();
+
   const onExit = () => {
     dispatch(appExit());
+    navigate(AppRoute.Login);
   };
 
   return (
