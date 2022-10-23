@@ -17,7 +17,7 @@ const Details = () => {
 
   useEffect(() => {
     if (!itemId || !currentItem) {
-      navigate(AppRoute.Items);
+      navigate(AppRoute.Items, {replace: true});
     }
   }, []);
 

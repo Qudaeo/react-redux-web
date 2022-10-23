@@ -21,7 +21,7 @@ const Login = ({type}: IProps) => {
 
   useEffect(() => {
     if (isAuth) {
-      navigate(AppRoute.Items);
+      navigate(AppRoute.Items, {replace: true});
     }
   }, [isAuth]);
 

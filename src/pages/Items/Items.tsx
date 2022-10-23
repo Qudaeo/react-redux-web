@@ -40,7 +40,7 @@ const Items = () => {
         dispatch(getItems(currentPage));
       }
     } else {
-      navigate(AppRoute.Login);
+      navigate(AppRoute.Login, {replace: true});
     }
   }, [isAuth, currentPage]);
 

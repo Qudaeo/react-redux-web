@@ -14,7 +14,7 @@ const Header = () => {
 
   const onExit = () => {
     dispatch(appExit());
-    navigate(AppRoute.Login);
+    navigate(AppRoute.Login, {replace: true});
   };
 
   return (
