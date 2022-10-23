@@ -1,0 +1,24 @@
+.paginationBlock {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.paginationBlock span {
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 1px;
+    padding-right: 1px;
+    min-width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginationBlock span:hover {
+    background-color: #929d9520;
+}
+
+.selectedPage {
+    background-color: rgba(0, 0, 0, 0.25);
+}

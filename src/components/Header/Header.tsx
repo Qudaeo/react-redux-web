@@ -21,7 +21,9 @@ const Header = () => {
       <div className={styles.header_buttons}>
         {isAuth ? (
           <>
-            <div className={styles.header_button}>{user.name}</div>
+            {user.name && (
+              <div className={styles.header_button}>{user.name}</div>
+            )}
             <div className={styles.header_button} onClick={onExit}>
               Exit
             </div>
