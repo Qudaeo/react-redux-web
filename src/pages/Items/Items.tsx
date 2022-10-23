@@ -8,6 +8,7 @@ import {getToken, Token} from '../../services/localStorage';
 import {useNavigate} from 'react-router-dom';
 import {AppRoute} from '../../base/routes';
 import {setAuth} from '../../redux/slices/authSlice';
+import ActivityIndicator from '../../components/ActivityIndicator/ActivityIndicator';
 
 const Items = () => {
   const {currentPage, pageLoading, items} = useSelector(
@@ -35,11 +36,14 @@ const Items = () => {
   }, [isAuth]);
 
   return (
-    <div className={styles.container}>
-      {items[currentPage]?.map(item => (
-        <Item key={item.id} item={item} />
-      ))}
-    </div>
+    <>
+      <div className={styles.container}>
+        {items[currentPage]?.map(item => (
+          <Item key={item.id} item={item} />
+        ))}
+      </div>
+      {pageLoading[currentPage] && <ActivityIndicator />}
+    </>
   );
 };
 

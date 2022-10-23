@@ -5,14 +5,16 @@ import styles from './Login.module.css';
 import {useNavigate} from 'react-router-dom';
 import {useEffect} from 'react';
 import {AppRoute} from '../../base/routes';
+import ActivityIndicator from '../../components/ActivityIndicator/ActivityIndicator';
 
 interface IProps {
   type: 'login' | 'signup';
 }
 
 const Login = ({type}: IProps) => {
-  const user = useSelector((state: RootState) => state.auth.user);
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const {isAuth, authInProgress, user} = useSelector(
+    (state: RootState) => state.auth
+  );
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
@@ -91,6 +93,7 @@ const Login = ({type}: IProps) => {
             }}
           />
         )}
+        {authInProgress && <ActivityIndicator />}
       </form>
     </div>
   );

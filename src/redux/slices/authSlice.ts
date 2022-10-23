@@ -12,6 +12,7 @@ export interface IUser {
 
 export interface AuthState {
   isAuth: boolean;
+  authInProgress: boolean;
   user: IUser;
 }
 
@@ -41,6 +42,7 @@ export const appExit = createAsyncThunk('auth/appExit', (_, thunkAPI) => {
 
 const initialState: AuthState = {
   isAuth: false,
+  authInProgress: false,
   user: {
     name: '',
     email: '',
@@ -61,16 +63,39 @@ export const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(login.fulfilled, (state, action) => ({
+      isAuth: true,
+      authInProgress: false,
       user: {
         name: action.payload?.name || '',
         email: action.payload?.email || '',
         password: '',
       },
-      isAuth: true,
     }));
 
-    builder.addCase(registration.fulfilled, state => {
-      state.isAuth = true;
+    builder.addCase(login.pending, state => {
+      state.authInProgress = true;
+    });
+
+    builder.addCase(login.rejected, state => {
+      state.authInProgress = true;
+    });
+
+    builder.addCase(registration.fulfilled, (state, action) => ({
+      isAuth: true,
+      authInProgress: false,
+      user: {
+        name: action.payload?.name || '',
+        email: action.payload?.email || '',
+        password: '',
+      },
+    }));
+
+    builder.addCase(registration.pending, state => {
+      state.authInProgress = true;
+    });
+
+    builder.addCase(registration.rejected, state => {
+      state.authInProgress = true;
     });
 
     builder.addCase(appExit.fulfilled, () => initialState);

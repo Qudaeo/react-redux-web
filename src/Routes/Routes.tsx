@@ -1,7 +1,7 @@
 import {Route, Routes} from 'react-router-dom';
-import {AppRoute} from '../../base/routes';
-import Login from '../../pages/Login/Login';
-import Items from '../../pages/Items/Items';
+import {AppRoute} from '../base/routes';
+import Login from '../pages/Login/Login';
+import Items from '../pages/Items/Items';
 
 const AppRoutes = () => (
   <Routes>

@@ -28,15 +28,19 @@ export const itemsSlice = createSlice({
     clearItems: () => initialState,
   },
   extraReducers: builder => {
-    builder.addCase(getItems.pending || getItems.rejected, state => {
-      state.pageLoading[state.currentPage] = true;
-    });
-
     builder.addCase(getItems.fulfilled, (state, action) => {
       if (action.payload) {
         state.items[state.currentPage] = action.payload.data;
       }
       state.pageLoading[state.currentPage] = false;
+    });
+
+    builder.addCase(getItems.pending, state => {
+      state.pageLoading[state.currentPage] = true;
+    });
+
+    builder.addCase(getItems.rejected, state => {
+      state.pageLoading[state.currentPage] = true;
     });
   },
 });
