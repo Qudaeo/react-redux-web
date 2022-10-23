@@ -10,29 +10,33 @@ import {AppRoute} from '../../base/routes';
 import {setAuth} from '../../redux/slices/authSlice';
 
 const Items = () => {
-  const items = useSelector((state: RootState) => state.items.items);
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const {currentPage, pageLoading, items} = useSelector(
+    (state: RootState) => state.items
+  );
+  const {isAuth} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    (async () => {
-      if (getToken(Token.access_token)) {
-        await dispatch(setAuth({isAuth: true}));
-      }
+    if (getToken(Token.access_token)) {
+      dispatch(setAuth({isAuth: true}));
+    }
+  }, []);
 
-      if (isAuth) {
-        dispatch(getItems());
-      } else {
-        navigate(AppRoute.Login);
+  useEffect(() => {
+    if (isAuth) {
+      if (!pageLoading[currentPage]) {
+        dispatch(getItems(currentPage));
       }
-    })();
+    } else {
+      navigate(AppRoute.Login);
+    }
   }, [isAuth]);
 
   return (
     <div className={styles.container}>
-      {items.map(item => (
+      {items[currentPage]?.map(item => (
         <Item key={item.id} item={item} />
       ))}
     </div>

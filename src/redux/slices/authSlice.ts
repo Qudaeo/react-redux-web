@@ -17,11 +17,8 @@ export interface AuthState {
 
 export const login = createAsyncThunk(
   'auth/login',
-  async ({email, password}: {email: string; password: string}) => {
-    console.log('auth/login');
-
-    return await apiAuth.login(email, password);
-  }
+  async ({email, password}: {email: string; password: string}) =>
+    await apiAuth.login(email, password)
 );
 
 export const registration = createAsyncThunk(
@@ -34,11 +31,7 @@ export const registration = createAsyncThunk(
     email: string;
     name: string;
     password: string;
-  }) => {
-    console.log('auth/registration');
-
-    return await apiAuth.registration(email, name, password);
-  }
+  }) => await apiAuth.registration(email, name, password)
 );
 
 export const appExit = createAsyncThunk('auth/appExit', (_, thunkAPI) => {
@@ -67,19 +60,20 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(login.fulfilled, state => {
-      state.isAuth = true;
-    });
+    builder.addCase(login.fulfilled, (state, action) => ({
+      user: {
+        name: action.payload?.name || '',
+        email: action.payload?.email || '',
+        password: '',
+      },
+      isAuth: true,
+    }));
 
     builder.addCase(registration.fulfilled, state => {
       state.isAuth = true;
     });
 
-    builder.addCase(appExit.fulfilled, state => {
-      state = initialState;
-
-      return state;
-    });
+    builder.addCase(appExit.fulfilled, () => initialState);
   },
 });
 

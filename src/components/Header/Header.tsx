@@ -6,7 +6,7 @@ import {AppDispatch, RootState} from '../../redux/store';
 import {appExit} from '../../redux/slices/authSlice';
 
 const Header = () => {
-  const isAuth = useSelector((state: RootState) => state.auth.isAuth);
+  const {isAuth, user} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
 
   const onExit = () => {
@@ -20,9 +20,12 @@ const Header = () => {
       </Link>
       <div className={styles.header_buttons}>
         {isAuth ? (
-          <div className={styles.header_button} onClick={onExit}>
-            Exit
-          </div>
+          <>
+            <div className={styles.header_button}>{user.name}</div>
+            <div className={styles.header_button} onClick={onExit}>
+              Exit
+            </div>
+          </>
         ) : (
           <>
             <Link className={styles.header_button} to={'/login'}>
