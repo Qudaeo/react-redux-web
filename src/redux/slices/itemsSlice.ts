@@ -46,7 +46,7 @@ export const itemsSlice = createSlice({
     });
 
     builder.addCase(getItems.rejected, state => {
-      state.pageLoading[state.currentPage] = true;
+      state.pageLoading[state.currentPage] = false;
     });
   },
 });

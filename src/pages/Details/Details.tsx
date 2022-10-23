@@ -1,13 +1,19 @@
 import styles from './Details.module.css';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../redux/store';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppDispatch, RootState} from '../../redux/store';
 import {useNavigate, useParams} from 'react-router-dom';
 import {AppRoute} from '../../base/routes';
-import {toRUB} from '../../services/locale';
 import {useEffect} from 'react';
+import {getCategories} from '../../redux/slices/categoriesSlice';
+import ActivityIndicator from '../../components/ActivityIndicator/ActivityIndicator';
 
 const Details = () => {
   const {currentPage, items} = useSelector((state: RootState) => state.items);
+  const {categories, loading} = useSelector(
+    (state: RootState) => state.categories
+  );
+  const dispatch = useDispatch<AppDispatch>();
+
   const navigate = useNavigate();
 
   const {itemId} = useParams();
@@ -18,11 +24,24 @@ const Details = () => {
   useEffect(() => {
     if (!itemId || !currentItem) {
       navigate(AppRoute.Items, {replace: true});
+      return;
+    }
+
+    const categoriesIds = currentItem.categories
+      .map(c => c.category_id)
+      .filter(id => !categories[id]);
+
+    if (categoriesIds.length > 0) {
+      dispatch(getCategories(categoriesIds));
     }
   }, []);
 
   if (!itemId || !currentItem) {
     return <></>;
+  }
+
+  if (loading) {
+    return <ActivityIndicator />;
   }
 
   return (
@@ -35,9 +54,15 @@ const Details = () => {
             draggable={'false'}
           />
           <div className={styles.name}>{currentItem.name}</div>
-          <div className={styles.description}>{currentItem.description}</div>
+          <div className={styles.categories}>
+            <div className={styles.category_text}>Categories:</div>
+            {currentItem.categories.map(category => (
+              <div key={category.id}>
+                {categories[category.category_id]?.name}
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={styles.price}>{toRUB(currentItem.price / 100)}</div>
       </div>
     </div>
   );

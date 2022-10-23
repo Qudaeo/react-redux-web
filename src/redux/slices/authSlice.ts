@@ -77,7 +77,7 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(login.rejected, state => {
-      state.authInProgress = true;
+      state.authInProgress = false;
     });
 
     builder.addCase(registration.fulfilled, (state, action) => ({
@@ -95,7 +95,7 @@ export const authSlice = createSlice({
     });
 
     builder.addCase(registration.rejected, state => {
-      state.authInProgress = true;
+      state.authInProgress = false;
     });
 
     builder.addCase(appExit.fulfilled, () => initialState);
