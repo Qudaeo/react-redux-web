@@ -62,15 +62,22 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(login.fulfilled, (state, action) => ({
-      isAuth: true,
-      authInProgress: false,
-      user: {
-        name: action.payload?.name || '',
-        email: action.payload?.email || '',
-        password: '',
-      },
-    }));
+    builder.addCase(login.fulfilled, (state, action) => {
+      if (!action.payload) {
+        state.authInProgress = false;
+        return state;
+      }
+
+      return {
+        isAuth: true,
+        authInProgress: false,
+        user: {
+          name: action.payload?.name || '',
+          email: action.payload?.email || '',
+          password: '',
+        },
+      };
+    });
 
     builder.addCase(login.pending, state => {
       state.authInProgress = true;
@@ -80,15 +87,22 @@ export const authSlice = createSlice({
       state.authInProgress = false;
     });
 
-    builder.addCase(registration.fulfilled, (state, action) => ({
-      isAuth: true,
-      authInProgress: false,
-      user: {
-        name: action.payload?.name || '',
-        email: action.payload?.email || '',
-        password: '',
-      },
-    }));
+    builder.addCase(registration.fulfilled, (state, action) => {
+      if (!action.payload) {
+        state.authInProgress = false;
+        return state;
+      }
+
+      return {
+        isAuth: true,
+        authInProgress: false,
+        user: {
+          name: action.payload?.name || '',
+          email: action.payload?.email || '',
+          password: '',
+        },
+      };
+    });
 
     builder.addCase(registration.pending, state => {
       state.authInProgress = true;
