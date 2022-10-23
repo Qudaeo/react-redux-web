@@ -2,13 +2,12 @@
     display: flex;
     justify-content: center;
     margin-top: 50px;
+    flex-wrap: wrap;
 }
 
 .paginationBlock span {
-    margin-left: 4px;
-    margin-right: 4px;
-    padding-left: 1px;
-    padding-right: 1px;
+    margin: 4px;
+    height: 20px;
     min-width: 20px;
     display: flex;
     align-items: center;
