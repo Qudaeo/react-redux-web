@@ -5,38 +5,30 @@ import {Url} from './urls';
 
 export const apiAuth = {
   login: async (email: string, password: string) => {
-    try {
-      return await axiosInstance
-        .post<IAuth>(Url.AUTH_LOGIN, {
-          email,
-          password,
-        })
-        .then(response => {
-          setTokens(response.data.tokens);
+    return await axiosInstance
+      .post<IAuth>(Url.AUTH_LOGIN, {
+        email,
+        password,
+      })
+      .then(response => {
+        setTokens(response.data.tokens);
 
-          return response.data;
-        });
-    } catch (e) {
-      console.log('auth/login error', e);
-    }
+        return response.data;
+      });
   },
 
   registration: async (email: string, name: string, password: string) => {
-    try {
-      return await axiosInstance
-        .post<IAuth>(Url.AUTH_REGISTRATION, {
-          email,
-          name,
-          password,
-        })
-        .then(response => {
-          setTokens(response.data.tokens);
+    return await axiosInstance
+      .post<IAuth>(Url.AUTH_REGISTRATION, {
+        email,
+        name,
+        password,
+      })
+      .then(response => {
+        setTokens(response.data.tokens);
 
-          return response.data;
-        });
-    } catch (e) {
-      console.log('auth/registration error', e);
-    }
+        return response.data;
+      });
   },
 
   refresh: async () => {
