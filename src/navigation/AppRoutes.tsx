@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom';
-import {AppRoute} from '../base/routes';
+import {AppRoute} from './routes';
 import Login from '../pages/Login/Login';
 import Items from '../pages/Items/Items';
 import Details from '../pages/Details/Details';

@@ -2,7 +2,7 @@ import styles from './Item.module.css';
 import {IItem} from '../../types/items';
 import {toRUB} from '../../services/locale';
 import {useNavigate} from 'react-router-dom';
-import {AppRoute} from '../../base/routes';
+import {AppRoute} from '../../navigation/routes';
 
 interface IProps {
   item: IItem;

@@ -5,7 +5,7 @@ export enum Token {
   refresh_token = 'refresh_token',
 }
 
-export const setToken = (token: Token, value: string) => {
+const setToken = (token: Token, value: string) => {
   try {
     localStorage.setItem(token, value);
   } catch (e) {
@@ -21,7 +21,7 @@ export const getToken = (token: Token) => {
   }
 };
 
-export const removeToken = (token: Token) => {
+const removeToken = (token: Token) => {
   try {
     return localStorage.removeItem(token);
   } catch (e) {
@@ -37,6 +37,4 @@ export const setTokens = (tokens: ITokens) => {
 export const removeTokens = () => {
   removeToken(Token.access_token);
   removeToken(Token.refresh_token);
-
-  return true;
 };

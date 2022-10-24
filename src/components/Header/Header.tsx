@@ -4,7 +4,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store';
 import {appExit} from '../../redux/slices/authSlice';
-import {AppRoute} from '../../base/routes';
+import {AppRoute} from '../../navigation/routes';
 
 const Header = () => {
   const {isAuth, user} = useSelector((state: RootState) => state.auth);

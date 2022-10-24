@@ -2,7 +2,7 @@ import styles from './Details.module.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch, RootState} from '../../redux/store';
 import {useNavigate, useParams} from 'react-router-dom';
-import {AppRoute} from '../../base/routes';
+import {AppRoute} from '../../navigation/routes';
 import {useEffect} from 'react';
 import {getCategories} from '../../redux/slices/categoriesSlice';
 import ActivityIndicator from '../../components/ActivityIndicator/ActivityIndicator';

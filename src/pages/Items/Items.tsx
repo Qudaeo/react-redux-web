@@ -6,7 +6,7 @@ import {getItems, setCurrentPage} from '../../redux/slices/itemsSlice';
 import Item from '../../components/Item/Item';
 import {getToken, Token} from '../../services/localStorage';
 import {useNavigate} from 'react-router-dom';
-import {AppRoute} from '../../base/routes';
+import {AppRoute} from '../../navigation/routes';
 import {setAuth} from '../../redux/slices/authSlice';
 import ActivityIndicator from '../../components/ActivityIndicator/ActivityIndicator';
 import Paginator from '../../components/Paginator/Paginator';

@@ -4,7 +4,7 @@ import {AppDispatch, RootState} from '../../redux/store';
 import styles from './Login.module.css';
 import {useNavigate} from 'react-router-dom';
 import {useEffect} from 'react';
-import {AppRoute} from '../../base/routes';
+import {AppRoute} from '../../navigation/routes';
 import ActivityIndicator from '../../components/ActivityIndicator/ActivityIndicator';
 
 interface IProps {
