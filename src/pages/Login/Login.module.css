@@ -1,6 +1,6 @@
 .container {
     background-color: #fff;
-    width: 300px;
+    max-width: 300px;
     margin: 40px auto;
     text-align: center;
     padding: 10px 25px 30px 25px;

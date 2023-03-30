@@ -17,6 +17,7 @@
 
 .paginationBlock span:hover {
     background-color: #929d9520;
+    cursor: default;
 }
 
 .selectedPage {
