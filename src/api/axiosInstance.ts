@@ -10,12 +10,10 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async config => {
-    config.headers = {
-      Authorization: `Bearer ${getToken(Token.access_token)}`,
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'X-API-KEY': API_KEY,
-    };
+    config.headers['Authorization'] = `Bearer ${getToken(Token.access_token)}`;
+    config.headers['Accept'] = 'application/json';
+    config.headers['Content-Type'] = 'application/json';
+    config.headers['X-API-KEY'] = API_KEY;
     return config;
   },
   error => {
