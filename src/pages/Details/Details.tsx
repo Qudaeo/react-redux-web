@@ -10,7 +10,7 @@ import ActivityIndicator from '../../components/ActivityIndicator/ActivityIndica
 const Details = () => {
   const {currentPage, items} = useSelector((state: RootState) => state.items);
   const {categories, loading} = useSelector(
-    (state: RootState) => state.categories
+    (state: RootState) => state.categories,
   );
   const dispatch = useDispatch<AppDispatch>();
 
@@ -18,7 +18,7 @@ const Details = () => {
 
   const {itemId} = useParams();
   const currentItem = items[currentPage]?.find(
-    item => item.id === +(itemId || 0)
+    item => item.id === +(itemId || 0),
   );
 
   useEffect(() => {

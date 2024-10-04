@@ -13,7 +13,7 @@ export const getItems = createAsyncThunk(
   'items/getItems',
   async (page: number) => {
     return await apiItems.getItems(page);
-  }
+  },
 );
 
 const initialState: ItemsState = {

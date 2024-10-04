@@ -19,7 +19,7 @@ export interface AuthState {
 export const login = createAsyncThunk(
   'auth/login',
   async ({email, password}: {email: string; password: string}) =>
-    await apiAuth.login(email, password)
+    await apiAuth.login(email, password),
 );
 
 export const registration = createAsyncThunk(
@@ -32,7 +32,7 @@ export const registration = createAsyncThunk(
     email: string;
     name: string;
     password: string;
-  }) => await apiAuth.registration(email, name, password)
+  }) => await apiAuth.registration(email, name, password),
 );
 
 export const appExit = createAsyncThunk('auth/appExit', (_, thunkAPI) => {

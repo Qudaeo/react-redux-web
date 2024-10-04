@@ -13,7 +13,7 @@ interface IProps {
 
 const Login = ({type}: IProps) => {
   const {isAuth, authInProgress, user} = useSelector(
-    (state: RootState) => state.auth
+    (state: RootState) => state.auth,
   );
   const dispatch = useDispatch<AppDispatch>();
 
@@ -88,7 +88,7 @@ const Login = ({type}: IProps) => {
                   email: user.email,
                   name: user.name,
                   password: user.password,
-                })
+                }),
               );
             }}
           />

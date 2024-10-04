@@ -11,7 +11,7 @@ export const getCategories = createAsyncThunk(
   'items/getCategories',
   async (ids: number[]) => {
     return await apiCategories.getCategories(ids);
-  }
+  },
 );
 
 const initialState: ItemsState = {

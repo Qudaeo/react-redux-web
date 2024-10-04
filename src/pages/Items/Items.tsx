@@ -13,7 +13,7 @@ import Paginator from '../../components/Paginator/Paginator';
 
 const Items = () => {
   const {currentPage, lastPage, pageLoading, items} = useSelector(
-    (state: RootState) => state.items
+    (state: RootState) => state.items,
   );
   const {isAuth} = useSelector((state: RootState) => state.auth);
   const dispatch = useDispatch<AppDispatch>();
@@ -56,9 +56,7 @@ const Items = () => {
         onChangePage={onChangePage}
       />
       <div className={styles.container}>
-        {items[showedPage]?.map(item => (
-          <Item key={item.id} item={item} />
-        ))}
+        {items[showedPage]?.map(item => <Item key={item.id} item={item} />)}
       </div>
       {pageLoading[currentPage] && <ActivityIndicator />}
     </>
